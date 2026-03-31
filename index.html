@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vault | Cinematic Discoveries</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Vault.</h1>
+        <form id="search-form">
+            <input type="text" id="search-input" placeholder="Search for a movie..." required>
+            <button type="submit">Search</button>
+        </form>
+    </header>
+
+    <main>
+        <div id="loading" class="hidden">Fetching movies from the vault...</div>
+        
+        <div id="movie-grid" class="grid-container"></div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
