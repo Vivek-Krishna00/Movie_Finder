@@ -9,16 +9,38 @@
 <body>
     <header>
         <h1>Vault.</h1>
+        <button id="theme-toggle" type="button">Toggle Theme</button>
+        <button id="watchlist-toggle" type="button">Show Watchlist</button>
         <form id="search-form">
             <input type="text" id="search-input" placeholder="Search for a movie..." required>
-            <button type="submit">Search</button>
+            <button id="search-btn" type="submit">Search</button>
         </form>
+        <div class="controls">
+            <select id="filter-type">
+                <option value="">All Types</option>
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+                <option value="episode">Episode</option>
+            </select>
+            <select id="sort-by">
+                <option value="">Sort by</option>
+                <option value="year-asc">Year ↑</option>
+                <option value="year-desc">Year ↓</option>
+                <option value="title-asc">Title A–Z</option>
+                <option value="title-desc">Title Z–A</option>
+            </select>
+        </div>
     </header>
 
     <main>
         <div id="loading" class="hidden">Fetching movies from the vault...</div>
-        
-        <div id="movie-grid" class="grid-container"></div>
+        <div id="message" class="hidden"></div>
+        <div id="movies-container" class="grid-container"></div>
+
+        <section id="watchlist" class="hidden">
+            <h2>Your Watchlist</h2>
+            <div id="watchlist-container"></div>
+        </section>
     </main>
 
     <script src="script.js"></script>
