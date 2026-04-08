@@ -1,3 +1,4 @@
+
 const API_KEY = "acf65459";
 const BASE_URL = "https://www.omdbapi.com/";
 
@@ -31,6 +32,7 @@ async function fetchMovies(query) {
     filteredMovies = [...allMovies];
 
     renderMovies(filteredMovies);
+
   } catch (error) {
     console.error(error);
     showMessage("Something went wrong");
@@ -43,9 +45,7 @@ function renderMovies(movies) {
   const container = document.getElementById("movies-container");
   document.getElementById("message")?.classList.add("hidden");
 
-  container.innerHTML = movies
-    .map(
-      (movie) => `
+  container.innerHTML = movies.map(movie => `
     <div class="movie-card bg-gray-800 rounded-xl overflow-hidden shadow hover:scale-105 transition">
       <img src="${movie.Poster !== "N/A" ? movie.Poster : ""}" 
            alt="${movie.Title}" 
@@ -63,9 +63,7 @@ function renderMovies(movies) {
         </button>
       </div>
     </div>
-  `,
-    )
-    .join("");
+  `).join("");
 }
 
 searchForm.addEventListener("submit", (e) => {
@@ -89,7 +87,7 @@ searchInput.addEventListener("keypress", (e) => {
 filterType.addEventListener("change", () => {
   const type = filterType.value;
 
-  filteredMovies = allMovies.filter((movie) => {
+  filteredMovies = allMovies.filter(movie => {
     if (!type) return true;
     return movie.Type === type;
   });
@@ -104,11 +102,14 @@ sortBy.addEventListener("change", () => {
 
   if (value === "year-asc") {
     sorted.sort((a, b) => Number(a.Year) - Number(b.Year));
-  } else if (value === "year-desc") {
+  } 
+  else if (value === "year-desc") {
     sorted.sort((a, b) => Number(b.Year) - Number(a.Year));
-  } else if (value === "title-asc") {
+  } 
+  else if (value === "title-asc") {
     sorted.sort((a, b) => a.Title.localeCompare(b.Title));
-  } else if (value === "title-desc") {
+  } 
+  else if (value === "title-desc") {
     sorted.sort((a, b) => b.Title.localeCompare(a.Title));
   }
 
@@ -119,7 +120,7 @@ sortBy.addEventListener("change", () => {
 function addToWatchlist(movie) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-  const exists = watchlist.find((item) => item.imdbID === movie.imdbID);
+  const exists = watchlist.find(item => item.imdbID === movie.imdbID);
 
   if (!exists) {
     watchlist.push(movie);
@@ -131,7 +132,7 @@ function addToWatchlist(movie) {
 function removeFromWatchlist(id) {
   let watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-  watchlist = watchlist.filter((movie) => movie.imdbID !== id);
+  watchlist = watchlist.filter(movie => movie.imdbID !== id);
 
   localStorage.setItem("watchlist", JSON.stringify(watchlist));
   renderWatchlist();
@@ -142,9 +143,8 @@ moviesContainer.addEventListener("click", (event) => {
   if (!button) return;
 
   const id = button.dataset.imdbid;
-  const movie =
-    filteredMovies.find((item) => item.imdbID === id) ||
-    allMovies.find((item) => item.imdbID === id);
+  const movie = filteredMovies.find((item) => item.imdbID === id)
+    || allMovies.find((item) => item.imdbID === id);
 
   if (movie) addToWatchlist(movie);
 });
@@ -153,9 +153,7 @@ function renderWatchlist() {
   const container = document.getElementById("watchlist-container");
   const watchlist = JSON.parse(localStorage.getItem("watchlist")) || [];
 
-  container.innerHTML = watchlist
-    .map(
-      (movie) => `
+  container.innerHTML = watchlist.map(movie => `
     <div class="flex items-center gap-2 bg-gray-700 p-2 rounded">
       <img src="${movie.Poster}" class="w-10 h-14 object-cover">
       <div class="flex-1">
@@ -168,9 +166,7 @@ function renderWatchlist() {
         ✖
       </button>
     </div>
-  `,
-    )
-    .join("");
+  `).join("");
 }
 
 function showLoading(isLoading) {
@@ -203,16 +199,7 @@ watchlistToggle?.addEventListener("click", () => {
 });
 
 function loadRandomMovies() {
-  const randomQueries = [
-    "star",
-    "love",
-    "dark",
-    "hero",
-    "space",
-    "dream",
-    "city",
-    "wild",
-  ];
+  const randomQueries = ["star", "love", "dark", "hero", "space", "dream", "city", "wild"];
   const query = randomQueries[Math.floor(Math.random() * randomQueries.length)];
   fetchMovies(query);
 }
