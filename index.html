@@ -8,11 +8,15 @@
 </head>
 <body>
     <header>
-        <h1>Vault.</h1>
-        <button id="theme-toggle" type="button">Toggle Theme</button>
-        <button id="watchlist-toggle" type="button">Show Watchlist</button>
-        <form id="search-form">
-            <input type="text" id="search-input" placeholder="Search for a movie..." required>
+        <div class="header-brand">
+            <h1>Vault.</h1>
+            <p>Discover films, add favorites, and keep your watchlist close.</p>
+        </div>
+        <div class="header-actions">
+            <button id="theme-toggle" type="button">Toggle Theme</button>
+        </div>
+        <form id="search-form" class="search-form">
+            <input type="text" id="search-input" placeholder="Search for movies, series..." required>
             <button id="search-btn" type="submit">Search</button>
         </form>
         <div class="controls">
@@ -33,15 +37,25 @@
     </header>
 
     <main>
-        <div id="loading" class="hidden">Fetching movies from the vault...</div>
-        <div id="message" class="hidden"></div>
-        <h2>Recommended Movies</h2>
-        <div id="movies-container" class="grid-container"></div>
+        <div class="content-grid">
+            <section class="home-panel">
+                <div id="loading" class="hidden">Fetching movies from the vault...</div>
+                <div id="message" class="hidden"></div>
+                <div class="panel-header">
+                    <h2>Recommended Movies</h2>
+                    <button id="load-more-btn" class="load-more hidden" type="button">Load More</button>
+                </div>
+                <div id="movies-container" class="grid-container"></div>
+            </section>
 
-        <section id="watchlist" class="hidden">
-            <h2>Your WatchList</h2>
-            <div id="watchlist-container"></div>
-        </section>
+            <aside id="watchlist" class="watchlist-panel">
+                <div class="watchlist-header">
+                    <h2>Your Watchlist</h2>
+                    <p>Keep track of films you want to watch next.</p>
+                </div>
+                <div id="watchlist-container" class="watchlist-container"></div>
+            </aside>
+        </div>
     </main>
 
     <script src="script.js"></script>
